@@ -30,7 +30,8 @@ fetchAnimes(1);
     </q-toolbar>
 
     <q-list bordered>
-      <q-item v-for="anime in animes" :key="anime.mal_id" class="q-my-sm" clickable v-ripple>
+      <q-item v-for="anime in animes" :key="anime.mal_id" class="q-my-sm"
+clickable v-ripple to="/animeview">
         <q-item-section avatar>
           <q-avatar>
             <img :src=anime.images.jpg.small_image_url>
@@ -41,9 +42,16 @@ fetchAnimes(1);
         </q-item-section>
 
         <q-item-section side>
-          <q-icon name="star" color="gray" />
+          <q-icon name="favorite_border" color="gray" />
         </q-item-section>
 
+        <q-item-section side>
+          <q-icon name="visibility" color="gray" />
+        </q-item-section>
+
+        <q-item-section side>
+          <q-icon name="check_circle" color="gray" />
+        </q-item-section>
       </q-item>
     </q-list>
     </div>
