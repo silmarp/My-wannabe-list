@@ -1,6 +1,10 @@
 <template>
   <q-page class="flex flex-center">
-    LISTA DE MANGAS AQUI
+    <ul id="example-1">
+      <li v-for="manga in mangas" :key="manga.mal_id">
+        {{ manga.title }}
+      </li>
+    </ul>
   </q-page>
 </template>
 
@@ -15,10 +19,13 @@ export default {
   methods: {
     async getMangas() {
       const url = 'https://api.jikan.moe/v4/manga';
-      const response = fetch(url);
-      this.mangas = await response.json().data;
-      console.log(this.mangas);
+      const response = await fetch(url);
+      const jsonObj = await response.json();
+      this.mangas = jsonObj.data;
     },
+  },
+  beforeMount() {
+    this.getMangas();
   },
 };
 </script>
