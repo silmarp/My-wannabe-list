@@ -1,3 +1,8 @@
+<!--
+  TODO: fazer o texto ficar justificado
+  TODO: Fazer ficar persitente o status do anime/manga
+  TODO: Colocar cores melhores para os botões
+  --->
 <template>
   <q-page class="flex flex-center">
     <q-card class="my-card" style="max-width=350px">
@@ -7,7 +12,7 @@
 
         </div>
       </q-img>
-      <q-card-actions>
+      <q-card-actions class="flex flex-center">
         <q-btn class="my-buttom" @click=fClick :style="fStyle" icon='star'
         label='Favorite' stack glossy/>
         <q-btn class="my-buttom" @click=wClick :style="wStyle" icon='visibility'

@@ -1,3 +1,6 @@
+<!--
+  TODO: Receber o ID do anime clicado
+-->
 <script setup>
 import DataCard from 'src/components/DataCard.vue';
 </script>

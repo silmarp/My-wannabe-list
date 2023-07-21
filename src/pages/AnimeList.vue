@@ -1,3 +1,6 @@
+<!--
+  TODO: Mandar o ID do naime clicado para a tela de animeview
+-->
 <script>
 export default {
   name: 'AnimeList',
