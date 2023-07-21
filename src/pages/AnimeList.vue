@@ -1,25 +1,24 @@
-<script setup>
-import { ref } from 'vue';
-
-const animes = ref([]);
-const selectedAnime = ref();
-const fetchingAnimes = ref(false);
-
-// https://jsonplaceholder.typicode.com/todos
-
-async function fetchAnimes(page) {
-  fetchingAnimes.value = true;
-
-  const fetcher = await fetch(`https://api.jikan.moe/v4/anime?page=${String(page)}`);
-  const data = await fetcher.json();
-  fetchingAnimes.value = false;
-
-  animes.value = data.data;
-
-  [selectedAnime.value] = animes.value;
-}
-
-fetchAnimes(1);
+<script>
+export default {
+  name: 'AnimeList',
+  data() {
+    return {
+      animes: undefined,
+    };
+  },
+  methods: {
+    async getAnimes(page) {
+      const url = `https://api.jikan.moe/v4/anime?page=${String(page)}`;
+      const response = await fetch(url);
+      const jsonObj = await response.json();
+      this.animes = jsonObj.data;
+      console.log(this.animes);
+    },
+  },
+  beforeMount() {
+    this.getAnimes(1);
+  },
+};
 </script>
 
 <template>
