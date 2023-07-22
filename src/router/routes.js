@@ -11,8 +11,7 @@ const routes = [
     path: '/aboutus',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      // TODO fazer pagina de aboutus
-      { path: '', component: () => import('pages/Error404.vue') },
+      { path: '', component: () => import('pages/AboutUs.vue') },
     ],
   },
 
