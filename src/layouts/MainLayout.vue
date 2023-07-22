@@ -11,11 +11,10 @@
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
 
-        <q-toolbar-title>
-          Quasar App
+        <q-toolbar-title :to="home" clickable>
+          My Wannabe List
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
 
@@ -51,46 +50,22 @@ import EssentialLink from 'components/EssentialLink.vue';
 
 const linksData = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
+    title: 'Home',
+    caption: 'App home page',
     icon: 'school',
-    link: 'https://quasar.dev',
+    link: { path: '/' },
   },
   {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
+    title: 'AboutUs',
+    caption: 'Information about the app and creators',
     icon: 'code',
-    link: 'https://github.com/quasarframework',
+    link: { path: 'aboutus' },
   },
   {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
+    title: 'anilist',
+    caption: 'testing remove on deploy',
     icon: 'chat',
-    link: 'https://chat.quasar.dev',
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev',
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev',
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev',
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev',
+    link: { path: 'animelist' },
   },
 ];
 
