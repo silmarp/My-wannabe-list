@@ -1,27 +1,34 @@
-<script setup>
-import { ref } from 'vue';
-
-props: {
-    vIcon: String;
-    dColor: String;
-    aColor: String;
-    dBtmColor: String;
-    aBtmColor: String;
-    vLabel: String;
-}
-const vStyle = ref(`background: ${dBtmColor}; color: ${aColor}`);
-
-function changeColor() {
-  activated.value = !activated.value;
-  if (activated.value) {
-    vStyle.value = ref(`background: ${aBtmColor}; color: ${aColor}`);
-  } else {
-    vStyle.value = ref(`background: ${dBtmColor}; color: ${dColor}`);
-  }
-}
+<script>
+export default {
+  props: {
+    aColor: String,
+    dColor: String,
+    aBtmColor: String,
+    dBtmColor: String,
+    vIcon: String,
+    vLabel: String,
+  },
+  data() {
+    return {
+      vStyle: 'background: red; color: blue',
+      bActivated: false,
+    };
+  },
+  methods: {
+    changeColor() {
+      this.bActivated = !this.bActivated;
+      if (this.bActivated) {
+        this.vStyle = `background: ${this.aBtmColor}; color: ${this.aColor}`;
+      } else {
+        this.vStyle = `background: ${this.dBtmColor}; color: ${this.dColor}`;
+      }
+    },
+  },
+};
 </script>
 
 <template>
-  <q-btn  @click=changeColor :style="vStyle"
-   :icon="vIcon" :label="vLabel" stack glossy />
+  <q-btn  @click=changeColor :style= "vStyle"
+  :icon="this.vIcon"
+  :label="this.vLabel" stack glossy />
 </template>
