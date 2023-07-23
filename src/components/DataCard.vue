@@ -45,12 +45,12 @@ export default {
       wStyle: 'background: white; color: grey', // watched style
       mStyle: 'background: white; color: grey', // marked to watch style
       markLabel: 'Will',
-      fColor: '#ffff00', // favorite icon color when activated
-      fBtnColor: 'purple', // favorite buton color when activated
-      wColor: '#00e1ff', // favorite icon color when activated
-      wBtnColor: '#FF0080', // favorite buton color when activated
-      mColor: 'yellow', // favorite icon color when activated
-      mBtnColor: 'purple', // favorite buton color when activated
+      fColor: '#E88C0C', // favorite icon color when activated
+      fBtnColor: '#0C94E8', // favorite buton color when activated
+      wColor: '#FF7D19', // favorite icon color when activated
+      wBtnColor: '#19E4FF', // favorite buton color when activated
+      mColor: '#E84B0C', // favorite icon color when activated
+      mBtnColor: '#0CE8C5', // favorite buton color when activated
       fActivated: false,
       wActivated: false,
       mActivated: false,
