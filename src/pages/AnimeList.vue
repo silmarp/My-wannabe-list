@@ -1,31 +1,14 @@
-<!--
-  TODO: Mandar o ID do naime clicado para a tela de animeview
--->
-<script>
-export default {
-  name: 'AnimeList',
-  data() {
-    return {
-      animes: undefined,
-    };
-  },
-  methods: {
-    async getAnimes(page) {
-      const url = `https://api.jikan.moe/v4/anime?page=${String(page)}`;
-      const response = await fetch(url);
-      const jsonObj = await response.json();
-      this.animes = jsonObj.data;
-      console.log(this.animes);
-    },
-  },
-  beforeMount() {
-    this.getAnimes(1);
-  },
-};
-</script>
-
 <template>
-  <q-page class="column flex-left">
+  <q-page class="column flex-center">
+    <div class="q-pa-lg flex flex-center">
+      <q-pagination
+      v-model="page"
+      @input=getAnimes
+      :max="pagination.last_visible_page"
+      :max-pages="6"
+      input
+    />
+    </div>
     <div class="q-pa-md" style="max-width: 350px;">
       <q-toolbar class="bg-primary text-white shadow-2">
       <q-toolbar-title>Anime List</q-toolbar-title>
@@ -33,7 +16,7 @@ export default {
 
     <q-list bordered>
       <q-item v-for="anime in animes" :key="anime.mal_id" class="q-my-sm"
-clickable v-ripple to="/animeview">
+clickable v-ripple :to="`animeview/${anime.mal_id}`">
         <q-item-section avatar>
           <q-avatar>
             <img :src=anime.images.jpg.small_image_url>
@@ -57,5 +40,34 @@ clickable v-ripple to="/animeview">
       </q-item>
     </q-list>
     </div>
+
   </q-page>
 </template>
+
+<script>
+
+export default {
+  name: 'AnimeList',
+
+  data() {
+    return {
+      animes: undefined,
+      pagination: undefined,
+      page: '1',
+    };
+  },
+  methods: {
+    async getAnimes(page) {
+      console.log(page);
+      const url = `https://api.jikan.moe/v4/anime?page=${String(page)}`;
+      const response = await fetch(url);
+      const jsonObj = await response.json();
+      this.animes = jsonObj.data;
+      this.pagination = jsonObj.pagination;
+    },
+  },
+  beforeMount() {
+    this.getAnimes(1);
+  },
+};
+</script>
