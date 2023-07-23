@@ -27,7 +27,7 @@ clickable v-ripple :to="`animeview/${anime.mal_id}`">
         </q-item-section>
 
         <q-item-section side>
-          <q-icon name="favorite_border" color="gray" />
+          <q-icon name="star" color="gray" />
         </q-item-section>
 
         <q-item-section side>
@@ -35,7 +35,7 @@ clickable v-ripple :to="`animeview/${anime.mal_id}`">
         </q-item-section>
 
         <q-item-section side>
-          <q-icon name="check_circle" color="gray" />
+          <q-icon name="bookmark" color="gray" />
         </q-item-section>
       </q-item>
     </q-list>
@@ -54,11 +54,11 @@ export default {
       animes: undefined,
       pagination: undefined,
       page: '1',
+      
     };
   },
   methods: {
-    async getAnimes(page) {
-      console.log(page);
+    async getAnimes() {
       const url = `https://api.jikan.moe/v4/anime?page=${String(page)}`;
       const response = await fetch(url);
       const jsonObj = await response.json();
