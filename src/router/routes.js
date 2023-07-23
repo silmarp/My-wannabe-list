@@ -8,6 +8,14 @@ const routes = [
   },
 
   {
+    path: '/aboutus',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/AboutUs.vue') },
+    ],
+  },
+
+  {
     path: '/animelist',
     component: () => import('layouts/MainLayout.vue'),
     children: [
