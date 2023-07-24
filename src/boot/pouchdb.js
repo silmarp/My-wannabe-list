@@ -1,7 +1,7 @@
 // import something here
 import PouchDB from 'pouchdb';
 
-const db = new PouchDB('liked');
+const db = new PouchDB('AnimeInfo');
 // "async" is optional;
 // more info on params: https://quasar.dev/quasar-cli/boot-files
 export default async (/* { app, router, Vue ... } */) => {
