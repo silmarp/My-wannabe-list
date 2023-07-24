@@ -53,7 +53,7 @@ export default {
     return {
       animes: undefined,
       pagination: undefined,
-      page: '1',
+      page: 1,
     };
   },
   methods: {
