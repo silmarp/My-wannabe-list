@@ -54,11 +54,11 @@ export default {
       animes: undefined,
       pagination: undefined,
       page: '1',
-      
+
     };
   },
   methods: {
-    async getAnimes() {
+    async getAnimes(page) {
       const url = `https://api.jikan.moe/v4/anime?page=${String(page)}`;
       const response = await fetch(url);
       const jsonObj = await response.json();
