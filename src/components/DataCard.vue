@@ -18,7 +18,7 @@
         <q-btn class="my-buttom" @click=wClick :style="wStyle" icon='visibility'
         label='Watched' stack glossy/>
         <q-btn class="my-buttom" @click=mClick :style="mStyle" icon='bookmark'
-        :label=this.markLabel stack glossy/>
+        label='Bookmark' stack glossy/>
       </q-card-actions>
       <q-card-section class="text-subitle2">
         {{ data.synopsis }}
@@ -45,12 +45,12 @@ export default {
       wStyle: 'background: white; color: grey', // watched style
       mStyle: 'background: white; color: grey', // marked to watch style
       markLabel: 'Will',
-      fColor: '#ffff00', // favorite icon color when activated
-      fBtnColor: 'purple', // favorite buton color when activated
-      wColor: '#00e1ff', // favorite icon color when activated
-      wBtnColor: '#FF0080', // favorite buton color when activated
-      mColor: 'yellow', // favorite icon color when activated
-      mBtnColor: 'purple', // favorite buton color when activated
+      fColor: '#FFBA42', // favorite icon color when activated
+      fBtnColor: '#429CFF', // favorite buton color when activated
+      wColor: '#E8943C', // favorite icon color when activated
+      wBtnColor: '#3CBBE8', // favorite buton color when activated
+      mColor: '#FF904F', // favorite icon color when activated
+      mBtnColor: '#4FFFFF', // favorite buton color when activated
       fActivated: false,
       wActivated: false,
       mActivated: false,
