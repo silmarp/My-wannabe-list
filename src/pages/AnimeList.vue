@@ -26,7 +26,7 @@ clickable v-ripple :to="`animeview/${anime.mal_id}`">
           <q-item-label>{{ anime.title }}</q-item-label>
         </q-item-section>
 
-        <q-item-section v-on:click="likeAndUnlike(anime.mal_id)" side>
+        <q-item-section side>
           <q-icon v-if="likeds.includes(anime.mal_id)" name="favorite_border" color="blue" />
           <q-icon v-else name="favorite_border" color="gray" />
         </q-item-section>
@@ -81,14 +81,11 @@ export default {
       });
     },
     likeAndUnlike(id) {
-      console.log(this.likeds.includes(id));
       if (this.likeds.includes(id)) {
         this.likeds = this.likeds.filter((item) => item !== id);
       } else {
         this.likeds.push(id);
-        console.log('got here');
       }
-      console.log(this.likeds);
       this.updateLikeds();
     },
     updateLikeds() {

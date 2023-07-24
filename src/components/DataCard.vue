@@ -13,10 +13,20 @@
         </div>
       </q-img>
       <q-card-actions class="flex flex-center">
-        <q-btn class="my-buttom" @click=fClick :style="fStyle" icon='star'
-        label='Favorite' stack glossy/>
+        <q-btn v-if="likeds.includes(id)"
+          class="my-buttom" v-on:click=fClick
+          style='background: primary; color: pink' icon='star'
+          label='Favorite' stack glossy
+        />
+        <q-btn v-else
+          class="my-buttom" v-on:click=fClick
+          style='background: primary; color: grey' icon='star'
+          label='Favorite' stack glossy
+        />
+
         <q-btn class="my-buttom" @click=wClick :style="wStyle" icon='visibility'
         label='Watched' stack glossy/>
+
         <q-btn class="my-buttom" @click=mClick :style="mStyle" icon='bookmark'
         :label=this.markLabel stack glossy/>
       </q-card-actions>
@@ -29,6 +39,8 @@
 </template>
 
 <script>
+import { db } from 'boot/pouchdb';
+
 export default {
   name: 'Card',
   props: {
@@ -54,19 +66,13 @@ export default {
       fActivated: false,
       wActivated: false,
       mActivated: false,
+      likeds: [],
+      wacheds: [],
     };
   },
   methods: {
     fClick() {
-      this.fActivated = !this.fActivated;
-      if (this.fActivated) {
-        this.fStyle = `background: ${this.fBtnColor}; color: ${this.fColor}`;
-        // add to favorite in DB
-        console.log(`id ${this.id} colocado na base de dados`);
-      } else {
-        this.fStyle = 'background: white; color: grey';
-        // remove from favorite in DB
-      }
+      this.likeAndUnlike(this.id);
     },
 
     wClick() {
@@ -79,6 +85,7 @@ export default {
         this.wStyle = 'background: white; color: grey';
         // remove from favorite in DB
       }
+      this.watchAndUnwatch(this.id);
     },
 
     mClick() {
@@ -91,6 +98,66 @@ export default {
         this.mStyle = 'background: white; color: grey';
         // remove from favorite in DB
       }
+    },
+    getLikeds() {
+      db.get('likeds').then((doc) => {
+        this.likeds = doc.mal_ids;
+      }).catch(() => {
+        db.put({
+          _id: 'likeds',
+          mal_ids: [],
+        });
+      });
+    },
+    likeAndUnlike(id) {
+      if (this.likeds.includes(id)) {
+        this.likeds = this.likeds.filter((item) => item !== id);
+      } else {
+        this.likeds.push(id);
+      }
+      this.updateLikeds();
+    },
+    updateLikeds() {
+      db.get('likeds').then((doc) => {
+        db.put({
+          _id: 'likeds',
+          // eslint-disable-next-line no-underscore-dangle
+          _rev: doc._rev,
+          mal_ids: this.likeds,
+        });
+      });
+    },
+
+    getWacheds() {
+      db.get('wacheds').then((doc) => {
+        this.likeds = doc.mal_ids;
+        if (this.wacheds.includes(this.id)) {
+          this.wClick();
+        }
+      }).catch(() => {
+        db.put({
+          _id: 'wacheds',
+          mal_ids: [],
+        });
+      });
+    },
+    watchAndUnwatch(id) {
+      if (this.watcheds.includes(id)) {
+        this.likeds = this.watcheds.filter((item) => item !== id);
+      } else {
+        this.watcheds.push(id);
+      }
+      this.updateWatcheds();
+    },
+    updateWatcheds() {
+      db.get('watcheds').then((doc) => {
+        db.put({
+          _id: 'watcheds',
+          // eslint-disable-next-line no-underscore-dangle
+          _rev: doc._rev,
+          mal_ids: this.watcheds,
+        });
+      });
     },
 
     async getData() {
@@ -115,6 +182,7 @@ export default {
   },
   beforeMount() {
     this.getData();
+    this.getLikeds();
   },
 };
 
