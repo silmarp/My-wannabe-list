@@ -59,7 +59,7 @@ export default {
     return {
       animes: undefined,
       pagination: undefined,
-      page: '1',
+      page: 1,
       likeds: [],
       watcheds: [],
       wantToSee: [],
