@@ -27,16 +27,20 @@ clickable v-ripple :to="`animeview/${anime.mal_id}`">
         </q-item-section>
 
         <q-item-section side>
-          <q-icon v-if="likeds.includes(anime.mal_id)" name="favorite_border" color="blue" />
+          <q-icon v-if="likeds.includes(String(anime.mal_id))"
+            name="favorite_border" color="purple" />
           <q-icon v-else name="favorite_border" color="gray" />
         </q-item-section>
 
-        <q-item-section side>
-          <q-icon name="visibility" color="gray" />
+        <q-item-section  side>
+          <q-icon v-if="watcheds.includes(String(anime.mal_id))" name="visibility" color="purple" />
+          <q-icon v-else name="visibility" color="gray" />
         </q-item-section>
 
         <q-item-section side>
-          <q-icon name="check_circle" color="gray" />
+          <q-icon v-if="wantToSee.includes(String(anime.mal_id))"
+            name="check_circle" color="purple" />
+          <q-icon v-else name="check_circle" color="gray" />
         </q-item-section>
       </q-item>
     </q-list>
@@ -57,6 +61,8 @@ export default {
       pagination: undefined,
       page: '1',
       likeds: [],
+      watcheds: [],
+      wantToSee: [],
     };
   },
   methods: {
@@ -68,11 +74,9 @@ export default {
       this.animes = jsonObj.data;
       this.pagination = jsonObj.pagination;
     },
-    getLikeds() {
+    async getLikeds() {
       db.get('likeds').then((doc) => {
         this.likeds = doc.mal_ids;
-        console.log('ids');
-        console.log(doc.mal_ids);
       }).catch(() => {
         db.put({
           _id: 'likeds',
@@ -98,10 +102,33 @@ export default {
         });
       });
     },
+    getWatcheds() {
+      db.get('watcheds').then((doc) => {
+        this.watcheds = doc.mal_ids;
+      }).catch(() => {
+        db.put({
+          _id: 'watcheds',
+          mal_ids: [],
+        });
+      });
+    },
+    getwantToSee() {
+      db.get('wantToSee').then((doc) => {
+        this.wantToSee = doc.mal_ids;
+      }).catch(() => {
+        db.put({
+          _id: 'wantToSee',
+          mal_ids: [],
+        });
+      });
+    },
   },
+
   beforeMount() {
-    this.getLikeds();
     this.getAnimes(1);
+    this.getLikeds();
+    this.getWatcheds();
+    this.getwantToSee();
   },
 };
 </script>
