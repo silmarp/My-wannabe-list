@@ -15,20 +15,36 @@
       <q-card-actions class="flex flex-center">
         <q-btn v-if="likeds.includes(id)"
           class="my-buttom" v-on:click=fClick
-          style='background: primary; color: pink' icon='star'
+          style='background: primary; color: purple'
+          icon='star'
           label='Favorite' stack glossy
         />
         <q-btn v-else
           class="my-buttom" v-on:click=fClick
-          style='background: primary; color: grey' icon='star'
+          style='background: white; color: grey' icon='star'
           label='Favorite' stack glossy
         />
 
-        <q-btn class="my-buttom" @click=wClick :style="wStyle" icon='visibility'
+        <q-btn v-if="watcheds.includes(this.id)"
+          class="my-buttom" @click=wClick
+          style='background: primary; color: purple' icon='visibility'
+        label='Watched' stack glossy/>
+        <q-btn v-else
+          class="my-buttom" @click=wClick
+          style='background: white; color: grey'
+          icon='visibility'
         label='Watched' stack glossy/>
 
-        <q-btn class="my-buttom" @click=mClick :style="mStyle" icon='bookmark'
+        <q-btn v-if="wantToSee.includes(id)"
+          class="my-buttom" @click=mClick
+          style='background: white; color: purple'
+          icon='bookmark'
         :label=this.markLabel stack glossy/>
+        <q-btn v-else class="my-buttom" @click=mClick
+          style='background: white; color: grey'
+          icon='bookmark'
+        :label=this.markLabel stack glossy/>
+
       </q-card-actions>
       <q-card-section class="text-subitle2">
         {{ data.synopsis }}
@@ -67,7 +83,8 @@ export default {
       wActivated: false,
       mActivated: false,
       likeds: [],
-      wacheds: [],
+      watcheds: [],
+      wantToSee: [],
     };
   },
   methods: {
@@ -76,28 +93,11 @@ export default {
     },
 
     wClick() {
-      this.wActivated = !this.wActivated;
-      if (this.wActivated) {
-        this.wStyle = `background: ${this.wBtnColor}; color: ${this.wColor}`;
-        // add to favorite in DB
-        console.log(`id ${this.id} colocado na base de dados`);
-      } else {
-        this.wStyle = 'background: white; color: grey';
-        // remove from favorite in DB
-      }
       this.watchAndUnwatch(this.id);
     },
 
     mClick() {
-      this.mActivated = !this.mActivated;
-      if (this.mActivated) {
-        this.mStyle = `background: ${this.mBtnColor}; color: ${this.mColor}`;
-        // add to favorite in DB
-        console.log(`id ${this.id} colocado na base de dados`);
-      } else {
-        this.mStyle = 'background: white; color: grey';
-        // remove from favorite in DB
-      }
+      this.wantUnwantToSee(this.id);
     },
     getLikeds() {
       db.get('likeds').then((doc) => {
@@ -128,22 +128,19 @@ export default {
       });
     },
 
-    getWacheds() {
-      db.get('wacheds').then((doc) => {
-        this.likeds = doc.mal_ids;
-        if (this.wacheds.includes(this.id)) {
-          this.wClick();
-        }
+    getWatcheds() {
+      db.get('watcheds').then((doc) => {
+        this.watcheds = doc.mal_ids;
       }).catch(() => {
         db.put({
-          _id: 'wacheds',
+          _id: 'watcheds',
           mal_ids: [],
         });
       });
     },
     watchAndUnwatch(id) {
       if (this.watcheds.includes(id)) {
-        this.likeds = this.watcheds.filter((item) => item !== id);
+        this.watcheds = this.watcheds.filter((item) => item !== id);
       } else {
         this.watcheds.push(id);
       }
@@ -156,6 +153,35 @@ export default {
           // eslint-disable-next-line no-underscore-dangle
           _rev: doc._rev,
           mal_ids: this.watcheds,
+        });
+      });
+    },
+
+    getwantToSee() {
+      db.get('wantToSee').then((doc) => {
+        this.wantToSee = doc.mal_ids;
+      }).catch(() => {
+        db.put({
+          _id: 'wantToSee',
+          mal_ids: [],
+        });
+      });
+    },
+    wantUnwantToSee(id) {
+      if (this.wantToSee.includes(id)) {
+        this.wantToSee = this.wantToSee.filter((item) => item !== id);
+      } else {
+        this.wantToSee.push(id);
+      }
+      this.updatewantToSee();
+    },
+    updatewantToSee() {
+      db.get('wantToSee').then((doc) => {
+        db.put({
+          _id: 'wantToSee',
+          // eslint-disable-next-line no-underscore-dangle
+          _rev: doc._rev,
+          mal_ids: this.wantToSee,
         });
       });
     },
@@ -183,6 +209,8 @@ export default {
   beforeMount() {
     this.getData();
     this.getLikeds();
+    this.getWatcheds();
+    this.getwantToSee();
   },
 };
 
