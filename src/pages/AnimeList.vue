@@ -27,15 +27,20 @@ clickable v-ripple :to="`animeview/${anime.mal_id}`">
         </q-item-section>
 
         <q-item-section side>
-          <q-icon name="favorite_border" color="gray" />
+          <q-icon v-if="likeds.includes(String(anime.mal_id))"
+            name="favorite_border" color="purple" />
+          <q-icon v-else name="favorite_border" color="gray" />
+        </q-item-section>
+
+        <q-item-section  side>
+          <q-icon v-if="watcheds.includes(String(anime.mal_id))" name="visibility" color="purple" />
+          <q-icon v-else name="visibility" color="gray" />
         </q-item-section>
 
         <q-item-section side>
-          <q-icon name="visibility" color="gray" />
-        </q-item-section>
-
-        <q-item-section side>
-          <q-icon name="check_circle" color="gray" />
+          <q-icon v-if="wantToSee.includes(String(anime.mal_id))"
+            name="check_circle" color="purple" />
+          <q-icon v-else name="check_circle" color="gray" />
         </q-item-section>
       </q-item>
     </q-list>
@@ -45,6 +50,7 @@ clickable v-ripple :to="`animeview/${anime.mal_id}`">
 </template>
 
 <script>
+import { db } from 'boot/pouchdb';
 
 export default {
   name: 'AnimeList',
@@ -54,6 +60,9 @@ export default {
       animes: undefined,
       pagination: undefined,
       page: 1,
+      likeds: [],
+      watcheds: [],
+      wantToSee: [],
     };
   },
   methods: {
@@ -65,9 +74,61 @@ export default {
       this.animes = jsonObj.data;
       this.pagination = jsonObj.pagination;
     },
+    async getLikeds() {
+      db.get('likeds').then((doc) => {
+        this.likeds = doc.mal_ids;
+      }).catch(() => {
+        db.put({
+          _id: 'likeds',
+          mal_ids: [],
+        });
+      });
+    },
+    likeAndUnlike(id) {
+      if (this.likeds.includes(id)) {
+        this.likeds = this.likeds.filter((item) => item !== id);
+      } else {
+        this.likeds.push(id);
+      }
+      this.updateLikeds();
+    },
+    updateLikeds() {
+      db.get('likeds').then((doc) => {
+        db.put({
+          _id: 'likeds',
+          // eslint-disable-next-line no-underscore-dangle
+          _rev: doc._rev,
+          mal_ids: this.likeds,
+        });
+      });
+    },
+    getWatcheds() {
+      db.get('watcheds').then((doc) => {
+        this.watcheds = doc.mal_ids;
+      }).catch(() => {
+        db.put({
+          _id: 'watcheds',
+          mal_ids: [],
+        });
+      });
+    },
+    getwantToSee() {
+      db.get('wantToSee').then((doc) => {
+        this.wantToSee = doc.mal_ids;
+      }).catch(() => {
+        db.put({
+          _id: 'wantToSee',
+          mal_ids: [],
+        });
+      });
+    },
   },
+
   beforeMount() {
     this.getAnimes(1);
+    this.getLikeds();
+    this.getWatcheds();
+    this.getwantToSee();
   },
 };
 </script>

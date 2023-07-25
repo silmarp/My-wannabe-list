@@ -9,7 +9,19 @@
 </template>
 
 <script>
+import { db } from 'boot/pouchdb';
+
 export default {
   name: 'PageIndex',
+  methods: {
+    dbinfo() {
+      db.info().then((info) => {
+        console.log(info);
+      });
+    },
+  },
+  beforeMount() {
+    this.dbinfo();
+  },
 };
 </script>
