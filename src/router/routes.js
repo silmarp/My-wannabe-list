@@ -1,6 +1,7 @@
 const routes = [
   {
     path: '/',
+    name: 'Home',
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', component: () => import('pages/Index.vue') },
@@ -9,6 +10,7 @@ const routes = [
 
   {
     path: '/aboutus',
+    name: 'About Us',
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', component: () => import('pages/AboutUs.vue') },
@@ -17,6 +19,7 @@ const routes = [
 
   {
     path: '/animelist',
+    name: 'Anime List',
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', component: () => import('pages/AnimeList.vue') },
@@ -25,6 +28,7 @@ const routes = [
 
   {
     path: '/animeview/:id',
+    name: 'Anime Info',
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', component: () => import('pages/AnimeView.vue') },
@@ -35,6 +39,7 @@ const routes = [
   // but you can also remove it
   {
     path: '*',
+    name: 'Error Not Found',
     component: () => import('pages/Error404.vue'),
   },
 ];

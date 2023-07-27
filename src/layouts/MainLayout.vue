@@ -12,7 +12,7 @@
         />
 
         <q-toolbar-title :to="home" clickable>
-          My Wannabe List
+          {{ this.$route.matched[0].name }}
         </q-toolbar-title>
 
       </q-toolbar>
