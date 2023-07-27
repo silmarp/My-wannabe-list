@@ -1,11 +1,10 @@
 <!--
   TODO: fazer o texto ficar justificado
-  TODO: Fazer ficar persitente o status do anime/manga
   TODO: Colocar cores melhores para os botões
   --->
 <template>
   <q-page class="flex flex-center">
-    <q-card class="my-card" style="max-width=350px">
+    <q-card class="my-card" style="max-width=650px">
       <q-img :src=data.images.jpg.image_url>
         <div class="absolute-bottom">
           <div class="text-h6">{{data.title}}</div>
@@ -14,34 +13,30 @@
       </q-img>
       <q-card-actions class="flex flex-center">
         <q-btn v-if="likeds.includes(id)"
-          class="my-buttom" v-on:click=fClick
-          style='background: primary; color: purple'
+          class="my-buttom active" v-on:click=fClick
           icon='star'
           label='Favorite' stack glossy
         />
         <q-btn v-else
-          class="my-buttom" v-on:click=fClick
-          style='background: white; color: grey' icon='star'
+          class="my-buttom inactive" v-on:click=fClick
+          icon='star'
           label='Favorite' stack glossy
         />
 
         <q-btn v-if="watcheds.includes(this.id)"
-          class="my-buttom" @click=wClick
-          style='background: primary; color: purple' icon='visibility'
+          class="my-buttom active" @click=wClick
+          icon='visibility'
         label='Watched' stack glossy/>
         <q-btn v-else
-          class="my-buttom" @click=wClick
-          style='background: white; color: grey'
+          class="my-buttom inactive" @click=wClick
           icon='visibility'
         label='Watched' stack glossy/>
 
         <q-btn v-if="wantToSee.includes(id)"
-          class="my-buttom" @click=mClick
-          style='background: white; color: purple'
+          class="my-buttom active" @click=mClick
           icon='bookmark'
         :label=this.markLabel stack glossy/>
-        <q-btn v-else class="my-buttom" @click=mClick
-          style='background: white; color: grey'
+        <q-btn v-else class="my-buttom inactive" @click=mClick
           icon='bookmark'
         :label=this.markLabel stack glossy/>
 
@@ -53,6 +48,15 @@
 
   </q-page>
 </template>
+
+<style lang="scss">
+.active {
+  color: $active;
+}
+.inactive {
+  color: $inactive;
+}
+</style>
 
 <script>
 import { db } from 'boot/pouchdb';

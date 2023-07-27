@@ -54,6 +54,9 @@ clickable v-ripple :to="`animeview/${anime.mal_id}`">
 .active {
   color: $active;
 }
+.inactive {
+  color: $inactive;
+}
 </style>
 
 <script>
