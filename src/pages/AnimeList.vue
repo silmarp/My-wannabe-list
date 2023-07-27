@@ -9,7 +9,7 @@
       input
     />
     </div>
-    <div class="q-pa-md" style="max-width: 350px;">
+    <div class="q-pa-md" style="max-width: 650px;">
       <q-toolbar class="bg-primary text-white shadow-2">
       <q-toolbar-title>Anime List</q-toolbar-title>
     </q-toolbar>
@@ -28,19 +28,20 @@ clickable v-ripple :to="`animeview/${anime.mal_id}`">
 
         <q-item-section side>
           <q-icon v-if="likeds.includes(String(anime.mal_id))"
-            name="favorite_border" color="purple" />
-          <q-icon v-else name="favorite_border" color="gray" />
+            name="favorite" class="active" />
+          <q-icon v-else name="favorite" class="inactive" />
         </q-item-section>
 
         <q-item-section  side>
-          <q-icon v-if="watcheds.includes(String(anime.mal_id))" name="visibility" color="purple" />
-          <q-icon v-else name="visibility" color="gray" />
+          <q-icon
+            v-if="watcheds.includes(String(anime.mal_id))" name="visibility" class="active" />
+          <q-icon v-else name="visibility" class="inactive" />
         </q-item-section>
 
         <q-item-section side>
           <q-icon v-if="wantToSee.includes(String(anime.mal_id))"
-            name="check_circle" color="purple" />
-          <q-icon v-else name="check_circle" color="gray" />
+            name="check_circle" class="active" />
+          <q-icon v-else name="check_circle" class="inactive" />
         </q-item-section>
       </q-item>
     </q-list>
@@ -48,6 +49,12 @@ clickable v-ripple :to="`animeview/${anime.mal_id}`">
 
   </q-page>
 </template>
+
+<style lang="scss">
+.active {
+  color: $active;
+}
+</style>
 
 <script>
 import { db } from 'boot/pouchdb';
