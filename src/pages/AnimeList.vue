@@ -10,9 +10,6 @@
     />
     </div>
     <div class="q-pa-md" style="max-width: 650px;">
-      <q-toolbar class="bg-primary text-white shadow-2">
-      <q-toolbar-title>Anime List</q-toolbar-title>
-    </q-toolbar>
 
     <q-list bordered>
       <q-item v-for="anime in animes" :key="anime.mal_id" class="q-my-sm"
