@@ -1,14 +1,5 @@
 <template>
   <q-page class="column flex-center">
-    <div class="q-pa-lg flex flex-center">
-      <q-pagination
-      v-model="page"
-      @input=getAnimes
-      :max="pagination.last_visible_page"
-      :max-pages="6"
-      input
-    />
-    </div>
     <div class="q-pa-md" style="max-width: 650px;">
 
     <q-list bordered>
@@ -42,6 +33,16 @@ clickable v-ripple :to="`animeview/${anime.mal_id}`">
         </q-item-section>
       </q-item>
     </q-list>
+    </div>
+
+    <div class="q-pa-lg flex flex-center">
+      <q-pagination
+      v-model="page"
+      @input=getAnimes
+      :max="pagination.last_visible_page"
+      :max-pages="6"
+      input
+    />
     </div>
 
   </q-page>
