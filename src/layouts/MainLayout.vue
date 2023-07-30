@@ -12,7 +12,7 @@
         />
 
         <q-toolbar-title :to="home" clickable>
-          {{ this.$route.matched[0].name }}
+          {{ this.$route.name }}
         </q-toolbar-title>
 
       </q-toolbar>

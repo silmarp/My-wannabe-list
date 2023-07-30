@@ -4,7 +4,7 @@ const routes = [
     name: 'Home',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') },
+      { path: '', name: 'Home', component: () => import('pages/Index.vue') },
     ],
   },
 
@@ -13,7 +13,7 @@ const routes = [
     name: 'About Us',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/AboutUs.vue') },
+      { path: '', name: 'About Us', component: () => import('pages/AboutUs.vue') },
     ],
   },
 
@@ -22,7 +22,7 @@ const routes = [
     name: 'Anime List',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/AnimeList.vue') },
+      { path: '', name: 'Anime List', component: () => import('pages/AnimeList.vue') },
     ],
   },
 
@@ -31,7 +31,18 @@ const routes = [
     name: 'Anime Info',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/AnimeView.vue') },
+      { path: '', name: 'Anime Info', component: () => import('pages/AnimeView.vue') },
+    ],
+  },
+
+  {
+    path: '/listas',
+    name: 'Lista',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: 'fav', name: 'Favoritos', component: () => import('pages/List.vue') },
+      { path: 'wanttosee', name: 'Quero Assistir', component: () => import('pages/List.vue') },
+      { path: 'seen', name: 'Assistido', component: () => import('pages/List.vue') },
     ],
   },
 
