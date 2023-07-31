@@ -11,7 +11,7 @@
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
 
-        <q-toolbar-title :to="home" clickable>
+        <q-toolbar-title>
           {{ this.$route.name }}
         </q-toolbar-title>
 
@@ -59,14 +59,33 @@ const linksData = [
     title: 'AboutUs',
     caption: 'Information about the app and creators',
     icon: 'code',
-    link: { path: 'aboutus' },
+    link: { path: '/aboutus' },
   },
   {
-    title: 'anilist',
-    caption: 'testing remove on deploy',
-    icon: 'chat',
-    link: { path: 'animelist' },
+    title: 'Anilist',
+    caption: 'List of animes',
+    icon: 'list',
+    link: { path: '/animelist' },
   },
+  {
+    title: 'Favoritos',
+    caption: 'animes marked as favorites',
+    icon: 'favorite',
+    link: { path: '/listas/fav' },
+  },
+  {
+    title: 'Quero Assistir',
+    caption: 'animes marked as want to see',
+    icon: 'visibility',
+    link: { path: '/listas/wanttosee' },
+  },
+  {
+    title: 'Assistido',
+    caption: 'animes marked as watched',
+    icon: 'bookmark',
+    link: { path: '/listas/seen' },
+  },
+
 ];
 
 export default {

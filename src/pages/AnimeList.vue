@@ -110,7 +110,7 @@ export default {
         });
       });
     },
-    getWatcheds() {
+    async getWatcheds() {
       db.get('watcheds').then((doc) => {
         this.watcheds = doc.mal_ids;
       }).catch(() => {
@@ -120,7 +120,7 @@ export default {
         });
       });
     },
-    getwantToSee() {
+    async getwantToSee() {
       db.get('wantToSee').then((doc) => {
         this.wantToSee = doc.mal_ids;
       }).catch(() => {
