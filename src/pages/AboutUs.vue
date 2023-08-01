@@ -26,14 +26,14 @@
 
           <q-card-section horizontal>
             <q-card-section>
-              Alguma coisa
             </q-card-section>
 
             <q-separator vertical></q-separator>
 
             <q-card-section>
-              Responsavel pelo Rounting das páginas, main layout,
-              lista de mangas, persistencia de dados, etc.
+              Responsavel pelo Routing das páginas, main layout, persistencia de dados,
+              lista de favoritos, quero assistir e assistidos,
+              sua interação com o banco de dados,  etc.
             </q-card-section>
           </q-card-section>
 
@@ -84,14 +84,13 @@
 
           <q-card-section horizontal>
             <q-card-section>
-              Alguma coisa
             </q-card-section>
 
             <q-separator vertical></q-separator>
 
             <q-card-section>
-              Fez as paginas de lista de animes, visualização do anime/manga selecionado,
-              About Us, e os componentes de Card para a visualização de detalhes do anime/manga
+              Fez as paginas de lista de animes, visualização do anime selecionado,
+              About Us, e os componentes de Card para a visualização de detalhes do anime
             </q-card-section>
           </q-card-section>
 
