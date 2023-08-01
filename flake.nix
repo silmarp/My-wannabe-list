@@ -48,11 +48,20 @@
         androidEmulator = pkgs.androidenv.emulateApp {
           name = "android-emulator";
           sdkExtraArgs = sdkArgs;
+          enableGPU = true;
+          avdHomeDir = "/home/silmar/.android/avd";
         };
         androidSdk = androidComposition.androidsdk;
         platformTools = androidComposition.platform-tools;
         jdk = pkgs.jdk;
 
+        envDependencies = with pkgs; [
+          gradle
+          nodePackages."@vue/cli"
+          nodePackages."cordova"
+          nodejs
+          nodePackages.vscode-langservers-extracted
+        ];
 
       in
       {
@@ -71,8 +80,13 @@
           androidemu = pkgs.mkShell rec {
               name = "androidenv-demo";
               packages = [
-                androidSdk platformTools androidEmulator jdk pkgs.android-studio
-              ];
+                androidSdk
+                platformTools
+                androidEmulator
+                jdk
+                pkgs.android-tools
+                pkgs.android-studio
+              ] ++ envDependencies;
 
               LANG = "C.UTF-8";
               LC_ALL = "C.UTF-8";
@@ -81,6 +95,7 @@
               # Note: ANDROID_HOME is deprecated. Use ANDROID_SDK_ROOT.
               ANDROID_SDK_ROOT = "${androidSdk}/libexec/android-sdk";
               ANDROID_NDK_ROOT = "${ANDROID_SDK_ROOT}/ndk-bundle";
+              ANDROID_HOME = "${androidSdk}/libexec/android-sdk";
 
               shellHook = ''
                 # Write out local.properties for Android Studio.
