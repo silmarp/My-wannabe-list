@@ -12,7 +12,7 @@
             </q-item-section>
 
             <q-item-section>
-              <q-item-label>Silmar </q-item-label>
+              <q-item-label>Silmar Pereira da Silva Junior</q-item-label>
               <q-item-label caption>
                 BSI 021
               </q-item-label>
