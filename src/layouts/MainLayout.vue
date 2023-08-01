@@ -50,40 +50,34 @@ import EssentialLink from 'components/EssentialLink.vue';
 
 const linksData = [
   {
-    title: 'Home',
-    caption: 'App home page',
-    icon: 'school',
+    title: 'AniList',
+    caption: 'List of animes',
+    icon: 'list',
     link: { path: '/' },
+  },
+  {
+    title: 'Favoritos',
+    caption: 'Animes marked as favorites',
+    icon: 'favorite',
+    link: { path: '/listas/fav' },
+  },
+  {
+    title: 'Quero Assistir',
+    caption: 'Animes marked as want to see',
+    icon: 'visibility',
+    link: { path: '/listas/wanttosee' },
+  },
+  {
+    title: 'Assistido',
+    caption: 'Animes marked as watched',
+    icon: 'bookmark',
+    link: { path: '/listas/seen' },
   },
   {
     title: 'AboutUs',
     caption: 'Information about the app and creators',
     icon: 'code',
     link: { path: '/aboutus' },
-  },
-  {
-    title: 'Anilist',
-    caption: 'List of animes',
-    icon: 'list',
-    link: { path: '/animelist' },
-  },
-  {
-    title: 'Favoritos',
-    caption: 'animes marked as favorites',
-    icon: 'favorite',
-    link: { path: '/listas/fav' },
-  },
-  {
-    title: 'Quero Assistir',
-    caption: 'animes marked as want to see',
-    icon: 'visibility',
-    link: { path: '/listas/wanttosee' },
-  },
-  {
-    title: 'Assistido',
-    caption: 'animes marked as watched',
-    icon: 'bookmark',
-    link: { path: '/listas/seen' },
   },
 
 ];

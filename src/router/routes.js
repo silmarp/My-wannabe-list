@@ -1,10 +1,10 @@
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'AniList',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', name: 'Home', component: () => import('pages/Index.vue') },
+      { path: '', name: 'AniList', component: () => import('pages/AnimeList.vue') },
     ],
   },
 
@@ -14,15 +14,6 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', name: 'About Us', component: () => import('pages/AboutUs.vue') },
-    ],
-  },
-
-  {
-    path: '/animelist',
-    name: 'Anime List',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [
-      { path: '', name: 'Anime List', component: () => import('pages/AnimeList.vue') },
     ],
   },
 
