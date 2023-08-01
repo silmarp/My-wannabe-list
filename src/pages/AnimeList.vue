@@ -76,7 +76,7 @@ export default {
   methods: {
     async getAnimes(page) {
       console.log(page);
-      const url = `https://api.jikan.moe/v4/anime?page=${String(page)}`;
+      const url = `https://api.jikan.moe/v4/anime?page=${String(page)}&order_by=title&sfw=true`;
       const response = await fetch(url);
       const jsonObj = await response.json();
       this.animes = jsonObj.data;
